@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "TCACoordinators",
   platforms: [
-    .iOS(.v13), .watchOS(.v7), .macOS(.v11), .tvOS(.v13),
+    .iOS(.v14), .watchOS(.v7), .macOS(.v11), .tvOS(.v13),
   ],
   products: [
     .library(
