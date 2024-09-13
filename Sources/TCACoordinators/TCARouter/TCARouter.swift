@@ -5,7 +5,7 @@ import SwiftUI
 /// TCARouter manages a collection of Routes, i.e., a series of screens, each of which is either pushed or presented.
 /// The TCARouter translates that collection into a hierarchy of SwiftUI views, and updates it when the user navigates back.
 public struct TCARouter<
-    Screen: Hashable,
+    Screen: Hashable & ObservableState,
     ScreenAction,
     ID: Hashable,
     Root: View,
@@ -35,8 +35,9 @@ public struct TCARouter<
         self.navigationViewModifier = navigationViewModifier
     }
     
-    func scopedStore(index: Int, screen: Screen) -> Store<Screen, ScreenAction> {
+    func scopedStore(screen: Screen) -> Store<Screen, ScreenAction> {
         var screen = screen
+        let index = store[].firstIndex(where: { $0.screen == screen }).unsafelyUnwrapped
         let id = identifier(screen, index)
         return store.scope(
             id: store.id(state: \.[index], action: \.[id: id]),
@@ -52,24 +53,15 @@ public struct TCARouter<
     }
     
     public var body: some View {
-        if Screen.self is ObservableState.Type {
-            WithPerceptionTracking {
-                FlowStack(
-                    $store[],
-                    withNavigation: withNavigation,
-                    navigationViewModifier: navigationViewModifier,
-                    root: root
-                )
-            }
-        } else {
-            UnobservedTCARouter(
-                store: store,
-                identifier: identifier,
-                navigationViewModifier: navigationViewModifier,
+        WithPerceptionTracking {
+            FlowStack(
+                $store[],
                 withNavigation: withNavigation,
-                root: root,
-                screenContent: screenContent
-            )
+                navigationViewModifier: navigationViewModifier,
+                root: root
+            ).flowDestination(for: Screen.self) { screenState in
+                screenContent(scopedStore(screen: screenState))
+            }
         }
     }
 }
