@@ -2,13 +2,13 @@ import ComposableArchitecture
 import FlowStacks
 import Foundation
 
-extension IdentifiedArray: RoutableCollection {
+extension IdentifiedArray {
   public mutating func _append(element: Element) {
     append(element)
   }
 }
 
-public extension RoutableCollection where Element: RouteProtocol {
+public extension Array where Element: RouteProtocol {
   /// Goes back to the topmost (most recently shown) screen in the stack
   /// that matches the given case path. If no screens satisfy the condition,
   /// the routes will be unchanged.

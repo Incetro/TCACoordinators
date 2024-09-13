@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/johnpatrickmorgan/FlowStacks",
         "state": {
           "branch": null,
-          "revision": "468de8179d68f9e150ffafcb4574dee52dfa3976",
-          "version": "0.4.0"
+          "revision": "4304f44a3b913a26671bc781a9f8511004900ad5",
+          "version": "0.8.1"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-dependencies",
         "state": {
           "branch": null,
-          "revision": "3ef38bb702a1a2f39c7e19fc0578403b8ee52b17",
-          "version": "1.3.9"
+          "revision": "fd1fb25b68fdb9756cd61d23dbd9e2614b340085",
+          "version": "1.4.0"
         }
       },
       {

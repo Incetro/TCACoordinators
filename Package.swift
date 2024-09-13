@@ -14,7 +14,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/johnpatrickmorgan/FlowStacks", "0.3.6" ..< "0.6.0"),
+    .package(url: "https://github.com/johnpatrickmorgan/FlowStacks", .upToNextMajor(from: "0.8.1")),
     .package(url: "https://github.com/Incetro/TCA", .branch("main"))
   ],
   targets: [
